@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\ImagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get("/", [FrontEndController::class, "index"]);
+
+
+//Controller Images
+
+Route::get("/admin", [ImagesController::class,"indexadmin"])->name("admin.welcome");
+Route::get("/fichiers", [ImagesController::class,"create"])->name("admin.fichiers");
+Route::post("/store", [ImagesController::class,"store"])->name("admin.store");
+Route::get("/create", [ImagesController::class,"create"])->name("admin.create");
+Route::post("/edit/{id}", [ImagesController::class,"edit"])->name("admin.edit");
+Route::post("/update/{id}", [ImagesController::class,"update"])->name("admin.update");
+Route::get("/delete/{id}", [ImagesController::class,"destroy"])->name("admin.destroy");
